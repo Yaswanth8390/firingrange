@@ -132,3 +132,27 @@ class WilsonCowanModel:
             I[i] = I[i-1] + dI * dt
 
         return times, E, I
+    if __name__ == '__main__':
+    import matplotlib.pyplot as plt
+
+    # Initialize model with default parameters
+    model = WilsonCowanModel(
+        tau_e=10.0, tau_i=10.0,
+        w_ee=12.0, w_ei=4.0,
+        w_ie=13.0, w_ii=11.0
+    )
+
+    # Run simulation
+    times, E, I = model.simulate(P=1.25, Q=0.0, T=500.0)
+
+    # Plot results
+    plt.figure(figsize=(10, 4))
+    plt.plot(times, E, label='Excitatory (E)', color='red')
+    plt.plot(times, I, label='Inhibitory (I)', color='blue')
+    plt.xlabel('Time (ms)')
+    plt.ylabel('Population Activity')
+    plt.title('Wilson-Cowan Neural Population Dynamics')
+    plt.legend()
+    plt.grid(True)
+    plt.tight_layout()
+    plt.show()
